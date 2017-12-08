@@ -1,4 +1,5 @@
 import Interval
+import re
 
 class Token(Interval):
     """ A Interval representing word like units of text with a dictionary of features """
@@ -24,15 +25,17 @@ class Token(Interval):
     @property
     def text(self):
         """ TODO: To be implemented"""
+        return self.text
 
     @property
     def pos(self):
         """ TODO: To be implemented"""
+        return self.pos
 
     @property
     def shape(self):
         """ TODO: To be implemented"""
-
+        return self.shape
     def __getitem__(self, item):
         """ TODO: To be implemented"""
 
@@ -54,3 +57,14 @@ class Sentence(Interval):
     def tokens(self):
         """Returns the list of tokens contained in a sentence"""
         # TODO: To be implemented (tip: use Interval.overlap)
+
+
+def get_shape_category_simple(word):
+    if word.islower():
+        return 'ALL-LOWER'
+    elif word.isupper():
+        return 'ALL-UPPER'
+    elif re.fullmatch('[A-Z][a-z]+', word):
+        return 'FIRST-UPPER'
+    else:
+        return 'MISC'
