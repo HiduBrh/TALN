@@ -21,5 +21,5 @@ class Document:
             pos = doc.text.find(word, offset)
             if pos >= 0:
                 offset = pos + len(word)
-                doc.tokens.append(Token(doc, pos, offset, None, get_shape_category_simple(word), word, label=label))
+                doc.tokens.append(Token(doc, pos, offset, label, get_shape_category_simple(word), word))
         return doc

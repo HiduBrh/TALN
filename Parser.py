@@ -1,4 +1,4 @@
-import Document
+from Document import Document
 
 class Parser(object):
     """Classe parente pour tous les parsers"""

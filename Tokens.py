@@ -1,4 +1,4 @@
-import Interval
+from Interval import Interval
 import re
 
 class Token(Interval):
