@@ -1,6 +1,17 @@
-from Document import Document
-from Interval import Interval
-from Parser import Parser
+from Tokenize import Interval, Document
+
+
+class Parser(object):
+    """Classe parente pour tous les parsers"""
+    def create(self):
+        return self
+
+    def read_file(self, filename: str) -> Document:
+        with open(filename, 'r', encoding='utf-8') as fp:
+            content = fp.read()
+        return self.read(content)
+
+
 class EnglishPosParser(Parser):
     def read(self, content: str) -> [Document]:
         """Reads the content of a NER/POS data file and returns one document instance per document it finds."""
