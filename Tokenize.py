@@ -1,5 +1,5 @@
 from typing import List
-from re import fullmatch
+from re import fullmatch, match
 
 
 class Interval:
@@ -146,7 +146,7 @@ class Document:
             pos = doc.text.find(word, offset)
             if pos >= 0:
                 offset = pos + len(word)
-                doc.tokens.append(Token(doc, pos, offset, label, get_shape_category_simple(word), word))
+                doc.tokens.append(Token(doc, pos, offset, label, get_shape_category(word), word))
         return doc
 
 
@@ -159,3 +159,21 @@ def get_shape_category_simple(word):
         return 'FIRST-UPPER'
     else:
         return 'MISC'
+
+
+def get_shape_category(token):
+    if match('^[\n]+$', token):  # IS LINE BREAK
+        return 'NL'
+    if any(char.isdigit() for char in token) and match('^[0-9.,]+$', token):  # IS NUMBER (E.G., 2, 2.000)
+        return 'NUMBER'
+    if fullmatch('[^A-Za-z0-9\t\n ]+', token):  # IS SPECIAL CHARS (E.G., $, #, ., *)
+        return 'SPECIAL'
+    if fullmatch('^[A-Z\-.]+$', token):  # IS UPPERCASE (E.G., AGREEMENT, INC.)
+        return 'ALL-CAPS'
+    if fullmatch('^[A-Z][a-z\-.]+$', token):  # FIRST LETTER UPPERCASE (E.G. This, Agreement)
+        return '1ST-CAP'
+    if fullmatch('^[a-z\-.]+$', token):  # IS LOWERCASE (E.G., may, third-party)
+        return 'LOWER'
+    if not token.isupper() and not token.islower():  # WEIRD CASE (E.G., 3RD, E2, iPhone)
+        return 'MISC'
+    return 'MISC'
