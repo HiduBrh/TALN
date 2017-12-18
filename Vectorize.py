@@ -1,6 +1,7 @@
 from gensim.models import KeyedVectors
 from typing import List
 from Tokenize import Document
+import numpy as np
 
 class Vectorizer:
     """ Transform a string into a vector representation"""
@@ -32,12 +33,23 @@ class Vectorizer:
         :return: lists of numpy arrays for word, pos and shape features.
                  Each item in the list is a sentence, i.e. a list of indices (one per token)
         """
+        words=[]
+        shapes=[]
         # Loop over documents
+        for doc in documents:
         #    Loop over sentences
+            for sentence in doc.sentences:
+                sentence_words=[]
+                sentence_shapes=[]
         #        Loop over tokens
+                for token in sentence.tokens:
         #           Convert features to indices
         #           Append to sentence
-        # return word, shape
+                    sentence_words.append(self._word_embeddings.index2word.index(token.text.lower()))
+                    sentence_shapes.append(self.shape_to_index[token.shape])
+                words.append(sentence_words)
+                shapes.append(sentence_shapes)
+        return words, shapes
 
     def encode_annotations(self, documents: List[Document]):
         """
@@ -45,10 +57,16 @@ class Vectorizer:
         :param documents: list of documents to be converted in annotations vector
         :return: numpy array. Each item in the list is a sentence, i.e. a list of labels (one per token)
         """
+        labels = []
         # Loop over documents
-        #    Loop over sentences
-        #        Loop over tokens
-        #           Convert label to numerical representation
-        #           Append to labels of sentence
-        #   append to sentences
-        # return labels
+        for doc in documents:
+            #    Loop over sentences
+            for sentence in doc.sentences:
+                sentence_labels = []
+                #        Loop over tokens
+                for token in sentence.tokens:
+                    #           Convert features to indices
+                    #           Append to sentence
+                    sentence_labels.append(self.pos_to_index[token.pos])
+                labels.append(sentence_labels)
+        return labels

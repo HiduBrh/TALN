@@ -72,7 +72,7 @@ class Interval:
 class Token(Interval):
     """ A Interval representing word like units of text with a dictionary of features """
 
-    def __init__(self, document, start: int, end: int, pos: str, shape: int, text: str):
+    def __init__(self, document, start: int, end: int, shape: int, text: str,label: str=None):
         """
         Note that a token has 2 text representations.
         1) How the text appears in the original document e.g. doc.text[token.start:token.end]
@@ -87,7 +87,7 @@ class Token(Interval):
 
         Interval.__init__(self, start, end)
         self._doc = document
-        self._pos = pos
+        self._label = label
         self._shape = shape
         self._text = text
 
@@ -146,7 +146,7 @@ class Document:
             pos = doc.text.find(word, offset)
             if pos >= 0:
                 offset = pos + len(word)
-                doc.tokens.append(Token(doc, pos, offset, label, get_shape_category(word), word))
+                doc.tokens.append(Token(doc, pos, offset, get_shape_category(word), word, label))
         return doc
 
 
