@@ -1,7 +1,10 @@
-from gensim.models import KeyedVectors
 from typing import List
-from Tokenize import Document
+
 import numpy as np
+from gensim.models import KeyedVectors
+
+from Token.Tokenize import Document
+
 
 class Vectorizer:
     """ Transform a string into a vector representation"""

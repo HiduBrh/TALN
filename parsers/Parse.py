@@ -1,4 +1,4 @@
-from Tokenize import Interval, Document
+from Token.Tokenize import Interval, Document
 
 
 class Parser(object):

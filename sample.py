@@ -1,7 +1,8 @@
-from Parse import EnglishPosParser
-from Vectorize import Vectorizer
-from keras.preprocessing import sequence
 import numpy as np
+from keras.preprocessing import sequence
+
+from parsers.Parse import EnglishPosParser
+from vect.Vectorize import Vectorizer
 
 parser = EnglishPosParser()
 documents = parser.read_file("eng.train")
