@@ -112,7 +112,7 @@ class Token(Interval):
         return self._text[item]
 
     def __repr__(self):
-        return 'Token({}, {}, {})'.format(self.text, self.start, self.end)
+        return 'token({}, {}, {})'.format(self.text, self.start, self.end)
 
 
 class Sentence(Interval):

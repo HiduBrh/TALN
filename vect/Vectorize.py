@@ -3,7 +3,7 @@ from typing import List
 import numpy as np
 from gensim.models import KeyedVectors
 
-from Token.Tokenize import Document
+from token.Tokenize import Document
 
 
 class Vectorizer:
