@@ -21,9 +21,9 @@ class Vectorizer:
                           "POS":16,"PRP":17,"PRP$":18,"RB":19,"RBR":20,"RBS":21,"RP":22,"SYM":23,"TO":24,"UH":25,
                           "VB":26,"VBD":27,"VBG":28,"VBN":29,"VBP":30,"VBZ":31,"WDT":32,"WP":33,"WP$":34,"WRB":35,
                           "``":36,"NN|SYM":46}
-        self.labels_to_index= {'o':0, 'PER':1, 'I-PER':1, 'B-PER':1, 'LOC':2, 'I-LOC':2, 'B-LOC':2, 'ORG':3, 'I-ORG':3,
-                               'B-ORG':3, 'MISC':4, 'I-MISC':4, 'B-MISC':4}
-        self.labels = ['o','PER','LOC','ORG','MISC']
+        #self.labels_to_index= {'o':0, 'PER':1, 'I-PER':1, 'B-PER':1, 'LOC':2, 'I-LOC':2, 'B-LOC':2, 'ORG':3, 'I-ORG':3,
+        #                       'B-ORG':3, 'MISC':4, 'I-MISC':4, 'B-MISC':4}
+        #self.labels = ['o','PER','LOC','ORG','MISC']
 
 
     def encode_features(self, documents: List[Document]):
@@ -50,7 +50,7 @@ class Vectorizer:
                         sentence_shapes.append(self.shape_to_index[token.shape])
                 words.append(sentence_words)
                 shapes.append(sentence_shapes)
-        return np.array(words), np.array(shapes)
+        return np.asarray(words), np.asarray(shapes)
 
     def encode_annotations(self, documents: List[Document]):
         """
@@ -71,4 +71,4 @@ class Vectorizer:
                     if token.text.lower() in self._word_embeddings.vocab:
                         sentence_labels.append(self.pos_to_index[token.label])
                 labels.append(sentence_labels)
-        return np.array(labels)
+        return np.asarray(labels)
