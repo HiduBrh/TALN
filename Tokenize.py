@@ -104,6 +104,10 @@ class Token(Interval):
     def shape(self):
         return self._shape
 
+    @property
+    def label(self):
+        return self._label
+
     def __getitem__(self, item):
         return self._text[item]
 
@@ -136,7 +140,7 @@ class Document:
         doc.sentences = []
         for sentence in sentences:
             text.append(' '.join(words[sentence.start:sentence.end + 1]) + ' ')
-            doc.sentences.append(Interval(offset, offset + len(text[-1])))
+            doc.sentences.append(Sentence(doc, offset, offset + len(text[-1])))
             offset += len(text[-1])
         doc.text = ''.join(text)
 
