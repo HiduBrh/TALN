@@ -74,15 +74,15 @@ class Token(Interval):
 
     def __init__(self, document, start: int, end: int, shape: int, text: str,label: str=None):
         """
-        Note that a token has 2 text representations.
-        1) How the text appears in the original document e.g. doc.text[token.start:token.end]
-        2) How the tokeniser represents the token e.g. nltk.word_tokenize('"') == ['``']
-        :param document: the document object containing the token
-        :param start: start of token in document text
-        :param end: end of token in document text
-        :param pos: part of speach of the token
-        :param shape: integer label describing the shape of the token
-        :param text: this is the text representation of token
+        Note that a Token has 2 text representations.
+        1) How the text appears in the original document e.g. doc.text[Token.start:Token.end]
+        2) How the tokeniser represents the Token e.g. nltk.word_tokenize('"') == ['``']
+        :param document: the document object containing the Token
+        :param start: start of Token in document text
+        :param end: end of Token in document text
+        :param pos: part of speach of the Token
+        :param shape: integer label describing the shape of the Token
+        :param text: this is the text representation of Token
         """
 
         Interval.__init__(self, start, end)
@@ -112,7 +112,7 @@ class Token(Interval):
         return self._text[item]
 
     def __repr__(self):
-        return 'token({}, {}, {})'.format(self.text, self.start, self.end)
+        return 'Token({}, {}, {})'.format(self.text, self.start, self.end)
 
 
 class Sentence(Interval):

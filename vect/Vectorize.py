@@ -3,7 +3,7 @@ from typing import List
 import numpy as np
 from gensim.models import KeyedVectors
 
-from token.Tokenize import Document
+from Token.Tokenize import Document
 
 
 class Vectorizer:
@@ -34,7 +34,7 @@ class Vectorizer:
         Creates a feature matrix for all documents in the sample list
         :param documents: list of all samples as document objects
         :return: lists of numpy arrays for word, pos and shape features.
-                 Each item in the list is a sentence, i.e. a list of indices (one per token)
+                 Each item in the list is a sentence, i.e. a list of indices (one per Token)
         """
         words=[]
         shapes=[]
@@ -59,7 +59,7 @@ class Vectorizer:
         """
         Creates the Y matrix representing the annotations (or true positives) of a list of documents
         :param documents: list of documents to be converted in annotations vector
-        :return: numpy array. Each item in the list is a sentence, i.e. a list of labels (one per token)
+        :return: numpy array. Each item in the list is a sentence, i.e. a list of labels (one per Token)
         """
         labels = []
         # Loop over documents
